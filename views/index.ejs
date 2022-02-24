@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link
+      rel="icon"
+      href="http://13.76.216.31:5000/static/img/empaminilogo.png"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%= content.title %>" />
+    <meta property="og:description" content="<%= content.brief %>" />
+    <meta property="og:image" content="<%- content.imgurl %>" />
+    <title><%= content.title %></title>
+    <style>
+            @font-face {
+              font-family: CyrveticaBold;
+              src: url("http://13.76.216.31:5000/static/fonts/MogulCyrveticaBold.ttf");
+              font-weight: bold;
+            }
+            @font-face {
+              font-family: Cyrvetica;
+              src: url("http://13.76.216.31:5000/static/fonts/MogulCyrvetica.ttf");
+            }
+            @font-face {
+              font-family: OptimaBold;
+              src: url("http://13.76.216.31:5000/static/fonts/MogulOptimaBold.ttf");
+              font-weight: bold;
+            }
+            .content{
+              margin-top: 7rem;
+              width: 90%;
+              margin-left: auto;
+              margin-right: auto;
+            }
+            .Container {
+              width: 100%;
+              background-color: #000066;
+              position: fixed;
+              top: 0;
+              left: 0;
+              z-index: 10;
+            }
+
+            .Toolbar {
+              margin: 0 auto;
+              height: 4.4rem;
+              max-width: 120rem;
+              width: 100%;
+              padding: 0 0rem;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
+            }
+            nav {
+              height: 100%;
+            }
+            .Logo {
+              height: 80%;
+              padding: 8px;
+              box-sizing: border-box;
+              border-radius: 5px;
+            }
+            .Logo img {
+              height: 100%;
+            }
+
+
+            .NavigationItems {
+              margin: 0;
+              padding: 0;
+              list-style: none;
+              display: flex;
+              flex-flow: column;
+              align-items: center;
+              height: 100%;
+            }
+
+
+            .NavigationItem {
+              margin: 10px 0;
+              box-sizing: border-box;
+              display: block;
+              width: 100%;
+            }
+           .NavigationItem a {
+              font-family: OptimaBold;
+              font-size: 1.2rem;
+              color: white;
+              text-decoration: none;
+              width: 100%;
+              box-sizing: border-box;
+              display: block;
+            }
+
+            a:hover,
+            a:active,
+            a.active {
+              color: rgb(206, 105, 26);
+            }
+            .DrawerToggle {
+          width: 40px;
+          height: 70%;
+          display: flex;
+          flex-flow: column;
+          justify-content: space-around;
+          align-items: center;
+          padding: 0.5rem 0;
+          box-sizing: border-box;
+          cursor: pointer;
+
+      }
+
+      .DrawerToggle div {
+          width: 90%;
+          height: 3px;
+          background-color: white;
+
+      }
+
+            @media (max-width: 499px) {
+              .DesktopOnly {
+                display: none;
+              }
+              .Toolbar{
+              width: 95%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              }
+            }
+            @media (min-width: 500px) {
+
+              .DrawerToggle {
+                display: none;
+              }
+              .aguulah {
+              margin-top: 7rem;
+              width: 70%;
+              margin-left: auto;
+              margin-right: auto;
+           }
+
+              .NavigationItems {
+                flex-flow: row;
+              }
+
+              .NavigationItem {
+                margin: 0;
+                display: flex;
+                width: auto;
+                align-items: center;
+              }
+             .NavigationItem a {
+                color: white;
+                text-decoration: none;
+                height: 100%;
+                padding: 16px 10px;
+                border-bottom: 4px solid transparent;
+              }
+
+              a:hover,
+              a:active,
+              a.active {
+                color: rgb(206, 105, 26);
+              }
+            }
+
+            .main {
+
+              width: 100%;
+              border-top: 0.25rem solid black;
+              padding-top: 1.5rem;
+            }
+            .main p {
+              padding-top: 1.5rem;
+              position: relative;
+              width: 100%;
+              text-align: center;
+              margin-top: 1rem;
+            }
+            .contain {
+              display: flex;
+              flex-direction: row;
+              justify-content: center;
+              flex-wrap: wrap;
+              row-gap: 1.2rem;
+              align-items: center;
+            }
+            .left {
+              max-width: 25rem;
+              width: 100%;
+            }
+            .left h3 {
+              font-family: OptimaBold;
+              font-size: 1rem;
+            }
+            .left img {
+              width: 13rem;
+            }
+            .middle {
+              max-width: 25rem;
+              width: 100%;
+            }
+            .middle h3 {
+              font-family: OptimaBold;
+              font-size: 1rem;
+            }
+            .additem {
+              padding-top: 0.3rem;
+            }
+            .additem img {
+              display: inline-block;
+              margin-right: 0.4rem;
+            }
+            .additem a {
+              text-decoration: none;
+              color: rgb(75, 151, 218);
+              font-size: 0.8rem;
+            }
+            .additem span {
+              font-size: 0.8rem;
+            }
+            .right {
+              max-width: 25rem;
+              width: 100%;
+            }
+            .social h3 {
+              font-family: OptimaBold;
+              font-size: 1rem;
+            }
+            .social img {
+              padding: 0.5rem 0.1rem;
+            }
+
+
+             <%- data[`${id}css`] %>
+    </style>
+  </head>
+  <body>
+    <div class="Container">
+      <header class="Toolbar">
+        <div onclick="history.back()" class="DrawerToggle">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="Logo">
+          <a href="http"></a>
+          <img
+            src="http://13.76.216.31:5000/static/img/empa_logo.png"
+            alt="Empasoft Logo"
+          />
+        </div>
+        <nav class="DesktopOnly">
+          <!-- <NavigationItems /> -->
+          <ul class="NavigationItems">
+            <li class="NavigationItem">
+              <a href="http://13.76.216.31:3000/">Нүүр</a>
+            </li>
+            <li class="NavigationItem"><a href="">Бидний тухай</a></li>
+            <li class="NavigationItem"><a href="">Бүтээгдэхүүн</a></li>
+            <li class="NavigationItem"><a href="">Үйлчилгээ</a></li>
+            <li class="NavigationItem"><a href="">Сургалт</a></li>
+            <li class="NavigationItem"><a href="">Kids Club</a></li>
+            <li class="NavigationItem"><a href="">Мэдээ</a></li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+    <section class="aguulah" <%- data[`${id}html`] %></section>
+    <div class="main">
+      <div id="huwaah"></div>
+      <div class="contain">
+        <div class="left">
+          <h3>Empasoft Office</h3>
+          <img
+            src="http://13.76.216.31:3000/static/media/map.55e9e707.jpg"
+            alt="Map"
+          />
+        </div>
+        <div class="middle">
+          <h3>Холбоо барих</h3>
+          <div class="additem">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAMCAYAAAC9QufkAAAACXBIWXMAAAsSAAALEgHS3X78AAAAoUlEQVQokZ2S0Q3CMAxEnyX+6SgdoSOwAR2BERiBEcoGjJARGKUbGBlZ5RSiFBHJUXzRO8dWAGbA/4jgNnBxd/aiKvbeLsC6ZyDgrPAEjD0DBTP/wCk0DWqwCac46QwEvFaGX5UH4JkRLyh5XzIfm3AFDtlCkR4XNVD4pGBn2puBwiF0wYaBH4A7cA4VeJhZHrvrGJyFm5nFJ4k+f12ru99eCd3tUF+D3oAAAAAASUVORK5CYII="
+              alt="Email"
+            />
+            <a href="mailto:info@empasoft.mn">info@empasoft.mn</a>
+          </div>
+          <div class="additem">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAACXBIWXMAAAsSAAALEgHS3X78AAAAsUlEQVQokZ1RCw3CMBC9h4JJQAoSkFAJSEACEsDBJFTCJEzCHBx5WQflPgvZJS9Z273P3UFV5WidyAMwAJgAaEP5S685T/w0KHzbA+sSEIlxj0gw9uLirFXdTRJ7CZzPkZt1Zj2M5ktVZ+eUOA/GvUZOFp8LTtfEvkWEHr8HkacRuHfJ2FqVbo1e7fvDhjkZaInIdBmT3feoeT9rzGPkJnBtsSOyj52IcBPbLNh/UVV5A0hSRlfMJ+glAAAAAElFTkSuQmCC"
+              alt="Phone"
+            />
+            <a href="tel:+97675779393">(+976)7577-9393</a>
+          </div>
+          <div class="additem">
+            <img
+              src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAARCAYAAADpPU2iAAAACXBIWXMAAAsSAAALEgHS3X78AAAAv0lEQVQokZWSbQ0CMQyG356CSUDCSZgEJCABCZOABCQgYRKQcBJAQUlHu/R2XQJN+mPr+3TrBzEzvBHRGcDqrh7M/OwnARQSkQQ48AogNZ2KTwBegdC7JEsG1EAQebHsPrgByJroEsSQh8tqdSm0e2nBn7Zosd4SESV8Wyzf9fa2Z7egwKjFdwNKEIw8G5B+mEPtg1PoGoi8rztAodlq3LpmAGSfRrE0pO3RAZg0oE19Cgy7VQ6xCSBd6//uzowPVW8GXwAO5roAAAAASUVORK5CYII="
+              alt="Address"
+            />
+            <span>СБД, 6-р хороо, Идэр цогцолбор, 3 давхарт</span>
+          </div>
+        </div>
+        <div class="right">
+          <div class="social">
+            <h3>Бидэнтэй холбогдох</h3>
+            <a href="https://www.facebook.com/mcp.ask" target="_blank">
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsSAAALEgHS3X78AAAB3UlEQVRYhcVX7XHDIAwVXP6XDZoR2CDOBh7BI2SEjJANmg2abEA3cDZwNsATqCcXU2IwH41Tv7t3ZxuEngUIxBARSsAY2wIAsXLMOiIiqqLBCCQgRQCQAHA2jjBBEtEAgMgaO/TRNv44VgmHc9QAcAyNmyWAjGcGLmVLPxLyERRAoQOAy0LOR1I0mlwBbWCApeiJmDo/v9D5GImH6bDbkDFWA8Cnt00SkFKCEMJ2atsWtNYxo7sRoe02NPOuA4pnWdc1dh1t/UdUVTVr4/D4MAWlK15K6TkekSlAj3mCm7AcvEBFcDgUdQ/hzSSrAXVAYZTT0DdNM/w5UQgRtXXYjuvvFGiM0oVSKto3wS036XYtDAJ2KwoYTtSscFGoU6C1EbKN8Mg9TU+g67pi49UFbExqfPdaJqAUO2K3+102fd/bNqWKL0RDOi6+cCy4DStuBKwC0s/N5WMNXMknR0SawNsKAoYfH3fByWt+Le6IeLYCzMvXPwqwxymffOy9rsvjiogXT4BZC08f9Anc3HsAYeO+0FQwxujxIzbOfr+3z4n7nwtyXtm7oOPUo1EZShx/ZTtXqnkfJmXZEjVCtDzLKUwpGjlF6ZS0s7ZPFaeBiFC+mDs7SCSt7uzKGBHhG27yrMaSzb11AAAAAElFTkSuQmCC"
+                alt="Facebook"
+              />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCDSFf9PNRRN89101rdqYwug"
+              target="_blank"
+            >
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAACcuBHKAAAACXBIWXMAAAsSAAALEgHS3X78AAACDUlEQVRYhcVX7XHCMAx95vhPNiDZIBuUETJC2CAjhA2yAdmgsAEj0AmabuBO4J6CkxokO1/Qvrt3HLJjvciyrChjDKZCKbUDEAFInWcvALQx5jp5QRIxhgByACd6ZIAaQA1gN3ptyXg34ea8GXDsYzNGDDM4ziMbYp+DKaTIRJIfrwi71/pJAjpefUK44TUCgkKkLXiVgF7IkIhn5cAQK1GEPQV/IaBjLImYewznsu58txVTKZUBeGeVzCKOY+R5fvef+IimaVr2JfRyaRlAYoxpuijUvrdJ09RoTdV4HvI8Z2s6LPrtCJ2IJQI60ItIa1OwyP9KKUVx3UgRo5BvNuLQJEhbZ/FGPyuaE8qFEA6HQ2D0F2maMlsHpVS0YtYJKMsSSZLgfD4vWSZdJAL2RGRZhv1+z8bGYr1URBRFKIqi5UzoRSKodtCWbLdbNjYW1Imt7c0mQmstmXscj0dmk+AWsAd80d+VMYY8fbBhUnf16puEgIhbObXFqhIKSUuqeEtQ1zVb02Hu3h1UED6ZTgvKfuJQ3XBBW0n3RlVVbMzi296k+j96iY6ldJXHwsRXUbtt3mNnVf6RiEzsrBwhYz5wlrBiPpnh1uxeX91NBUU4QryNztJEZP4koyOmCDU8Izn4KcgMnqjQYZ8qhuZTons//+4a3TGg5oOymt7KUrq1qPxTPp2MMZTgwwDwA4CUszaJWOpFAAAAAElFTkSuQmCC"
+                alt="Facebook"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <p>&copy; 2021 Empasoft. All Rights Reserved.</p>
+    </div>
+  </body>
+  <script></script>
+</html>

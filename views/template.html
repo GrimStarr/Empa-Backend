@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Oswald');
+.fl-left {
+    float: left
+}
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box
+}
+
+body {
+    width: 570px;
+    height: 100px;
+    background-color: white;
+    font-family: arial
+}
+
+.qr{ 
+    display: block;
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    width: 130px;
+    height: 130px;
+
+}
+.logo img{
+    opacity: 0.15;
+    z-index: 0;
+    background-image: url("logo.png");
+    display: block;
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    left: 170px;
+    bottom: -5px;
+ 
+}
+h1 {
+    text-transform: uppercase;
+    font-weight: 900;
+    border-left: 10px solid #fec500;
+    padding-left: 10px;
+    margin-bottom: 30px
+}
+
+.row {
+    overflow: hidden
+}
+
+.card {
+    display: table-row;
+    width: 570px;
+    background-color: #3a1574;
+    color: white;
+    margin-bottom: 10px;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    border-radius: 4px;
+    position: relative
+}
+
+.card+.card {
+    margin-left: 2%
+}
+
+.date {
+    z-index: 2;
+    display: table-cell;
+    width: 25%;
+    position: relative;
+    text-align: center;
+    border-right: 2px dashed white
+}
+
+.date:before,
+.date:after {
+  z-index: 2;
+    content: "";
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    z-index: 1;
+    border-radius: 50%
+}
+
+.date:after {
+  z-index: 2;
+    top: auto;
+    bottom: -15px
+}
+
+.date time {
+  z-index: 2;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
+}
+
+.date time span {
+  z-index: 2;
+    display: block
+}
+
+.date time span:first-child {
+    color: white;
+    font-weight: 600;
+    font-size: 250%
+}
+
+.date time span:last-child {
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: -10px
+}
+
+.card-cont {
+    display: table-cell;
+    width: 75%;
+    font-size: 85%;
+    padding: 10px 10px 30px 50px
+}
+
+.card-cont h3 {
+  z-index: 2;
+    color: #ffcf0e;
+    font-size: 130%
+}
+
+
+
+
+.card-cont .even-date i,
+.card-cont .even-info i,
+.card-cont .even-date time,
+.card-cont .even-info p {
+    display: table-cell
+}
+
+
+
+.card-cont .even-info p {
+    padding: 30px 50px 0 0
+}
+
+.card-cont .even-date time span {
+    display: block
+}
+
+
+</style>
+</head>
+<body>
+   <section class="container">
+
+        <div class="row">
+          <article class="card fl-left">
+            <section class="date">
+              <time datetime="23th feb">
+                <span>08</span><span>mar</span>
+              </time>
+            </section>
+            <section class="card-cont">
+              <small> </small>
+              <h3>Mongolian Women in Tech 2022</h3>
+              <div class="even-date">
+               <i class="fa fa-calendar"></i>
+               <time>
+                 <span>2022 оны 03 сарын 08</span>
+                 <span>09:00 цагт</span>
+               </time>
+              </div>
+              <div class="even-info">
+                <i class="fa fa-map-marker"></i>
+                <p>
+                  Тусгаар тогтнолын ордон<br> 7 давхарт, Их танхим
+                </p>
+              </div>
+              <div class="qr">
+                {{#each users}}
+                <img src="{{this.imgurl}}" alt="">
+                {{/each}}
+            
+              </div>
+              <div class="logo">
+                  <img src="https://github.com/GrimStarr/EImages/blob/main/images/logo.png?raw=true" alt="">
+              </div>
+
+            </section>
+          </article>
+        </div>
+       
+      </div>
+     
+</body>
+</html>

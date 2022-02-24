@@ -1,0 +1,61 @@
+const path = require("path");const path = require("path");const path = require("path");
+const { Router } = require("express");
+const TrainingTable = require("../training/table");
+const pool = require("../../databasePool");
+const multer = require("multer");
+const fs = require("fs");
+const { promisify } = require("util");
+const pipeline = promisify(require("stream").pipeline);
+const upload = multer();
+
+const router = new Router();
+router.post("/", upload.single("file"), async (req, res, next) => {
+  try {
+    const {
+      file,
+      body: { category_id, title, price, training_language, capacity },
+    } = req;
+
+    const fileName = Date.now() + file.originalName;
+   const filesDir =  path.join(__dirname, "../public/img/training");
+
+    if (!fs.existsSync(filesDir)) {
+      // if not create directory
+      console.log("huh?");
+      fs.mkdirSync(filesDir);
+    }
+
+    await pipeline(
+      file.stream,
+      fs.createWriteStream(`${filesDir}/${fileName}`)
+    );
+
+    console.log();
+
+    // const newTodo = await pool.query(
+    //   "insert into training ( category_id, title, price, capacity, training_language,imgurl,brief) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+    //   [
+    //     body.category_id,
+    //    body.title,
+    //    body.price,
+    //   body.capacity,
+    //   body.language,
+    //  body.imgurl,
+    //   body.body,
+    //  ]
+    // );
+    res.json({ worked: "hehe" });
+  } catch (err) {
+    console.log(`err`, err.message);
+  }
+});
+
+router.get("/", async (req, res) => {
+  try {
+    const allTodos = await pool.query("SELECT * FROM training ORDER BY id ASC");
+    res.json(allTodos.rows);
+  } catch (err) {
+    console.log(`err`, err.message);
+  }
+});
+module.exports = router;
