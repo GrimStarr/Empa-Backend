@@ -71,7 +71,38 @@ router.post("/", upload.single("file"), async (req, res, next) => {
     }
   };
 });
+router.post("/delete/:id/:title", async (req, res, next) => {
+  const { token } = req.body;
+  authenticatedAccount({ token: token })
+    .then(({ authenticated }) => {
+      trainingDelete().then((resp) => res.json(resp));
+    })
+    .catch((error) => next(error));
 
+  trainingDelete = async () => {
+    try {
+      const { id, title } = req.params;
+
+      const Stitle = title.replace(/[ \/]/g, "-");
+
+      const filesDir = path.join(
+        __dirname,
+        `../../public/img/training/${Stitle}`
+      );
+
+      const deleteTraining = await pool.query(
+        "DELETE FROM training WHERE id = $1",
+        [id]
+      );
+
+      rimraf(filesDir, function () {
+        return "success";
+      });
+    } catch (err) {
+      console.log(`err4`, err.message);
+    }
+  };
+});
 router.put("/", upload.single("file"), async (req, res, next) => {
   const { token } = req.body;
 
@@ -129,9 +160,7 @@ router.put("/", upload.single("file"), async (req, res, next) => {
             id,
           ]
         );
-        console.log("baina");
       } else {
-        console.log("baihgui");
         const update = await pool.query(
           "UPDATE training SET category_id = $1, title = $2, price = $3, capacity = $4, training_language = $5, form_id = $6 WHERE id = $7",
           [category_id, title, price, capacity, training_language, form_id, id]
@@ -156,36 +185,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.delete("/:id/:title", async (req, res) => {
-  // const { token } = req.body;
-
-  // authenticatedAccount({ token: token })
-  //   .then(({ authenticated }) => {
-  //     trainingDelete().then((resp) => res.json(resp));
-  //   })
-  //   .catch((error) => next(error));
-  // trainingDelete = async () => {
-  try {
-    const { id, title } = req.params;
-
-    const Stitle = title.replace(/[ \/]/g, "-");
-
-    const filesDir = path.join(
-      __dirname,
-      `../../public/img/training/${Stitle}`
-    );
-
-    const deleteTraining = await pool.query(
-      "DELETE FROM training WHERE id = $1",
-      [id]
-    );
-
-    rimraf(filesDir, function () {
-      res.json("success");
-    });
-  } catch (err) {
-    console.log(`err4`, err.message);
-  }
-  //};
+router.get("/download", function (req, res) {
+  const filesDir = path.join(__dirname, `../../public/file/Plan_of_2022.xlsx`);
+  res.download(filesDir);
 });
+
 module.exports = router;

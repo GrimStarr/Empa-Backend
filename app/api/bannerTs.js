@@ -8,6 +8,7 @@ const pipeline = promisify(require("stream").pipeline);
 const upload = multer();
 const router = new Router();
 const { authenticatedAccount } = require("./helper");
+const url = require("url");
 
 router.post("/", upload.single("file"), async (req, res, next) => {
   const { token } = req.body;
@@ -21,7 +22,7 @@ router.post("/", upload.single("file"), async (req, res, next) => {
     try {
       const {
         file,
-        body: { title, body, link, page },
+        body: { title, body, link, page, color },
       } = req;
 
       const fileName = Date.now() + file.originalName;
@@ -38,8 +39,8 @@ router.post("/", upload.single("file"), async (req, res, next) => {
       );
       const pathName = `http://13.76.216.31:5000/static/img/banner/${page}/${fileName}`;
       const banner = await pool.query(
-        "insert into banner (title, body, imgurl, link, page) VALUES ($1, $2, $3, $4, $5)",
-        [title, body, pathName, link, page]
+        "insert into banner (title, body, imgurl, link, page, color) VALUES ($1, $2, $3, $4, $5, $6)",
+        [title, body, pathName, link, page, color]
       );
       return "success";
     } catch (err) {
@@ -57,24 +58,41 @@ router.get("/", async (req, res) => {
     console.log(`err2`, err.message);
   }
 });
+router.post("/delete/:id", async (req, res, next) => {
+  const { token } = req.body;
+  authenticatedAccount({ token: token })
+    .then(({ authenticated }) => {
+      bannerDelete().then((resp) => res.json(resp));
+    })
+    .catch((error) => next(error));
+  const bannerDelete = async () => {
+    try {
+      const { id } = req.params;
+      const bannerName = await pool.query(
+        "select imgurl from banner where id = $1",
+        [id]
+      );
 
-router.delete("/:id", async (req, res) => {
-  // const { token } = req.body;
-  // authenticatedAccount({ token: token })
-  //   .then(({ authenticated }) => {
-  //     bannerDelete().then((resp) => res.json(resp));
-  //   })
-  //   .catch((error) => next(error));
-  // const bannerDelete = async () => {
-  try {
-    const { id } = req.params;
-    const deleteBanner = await pool.query("DELETE FROM banner WHERE id = $1", [
-      id,
-    ]);
-    return "success";
-  } catch (err) {
-    console.log(`err4`, err.message);
-  }
-  // };
+      const pathname = url
+        .parse(bannerName.rows[0].imgurl)
+        .pathname.replace("static", "public");
+
+      const filesDir = path.join(__dirname, `../../${pathname}`);
+      const deleteBanner = await pool.query(
+        "DELETE FROM banner WHERE id = $1",
+        [id]
+      );
+      fs.unlink(filesDir, (err) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+
+        return "success";
+      });
+    } catch (err) {
+      console.log(`err4`, err.message);
+    }
+  };
 });
 module.exports = router;

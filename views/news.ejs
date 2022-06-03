@@ -43,6 +43,22 @@
                     left: 0;
                     z-index: 10;
                   }
+                  .lend{
+                    margin-top: -2rem;
+                  }
+                  .lend img{
+                    padding-top: 2rem;
+                    padding-bottom: 2rem;
+                    display: block;
+                    width: 20rem;
+                   margin: auto;
+                  }
+                  .lend h3{
+                    position: relative;
+                    width: 100%;
+                    text-align: center;
+
+                  }
 
                   .Toolbar {
                     margin: 0 auto;
@@ -253,10 +269,7 @@
   <body>
     <div class="Container">
       <header class="Toolbar">
-        <div
-          onclick="parent.location='http://beta.empasoft.mn:3000/'"
-          class="DrawerToggle"
-        >
+        <div onclick="history.back()" class="DrawerToggle">
           <div></div>
           <div></div>
           <div></div>
@@ -272,25 +285,25 @@
           <!-- <NavigationItems /> -->
           <ul class="NavigationItems">
             <li class="NavigationItem">
-              <a href="http://beta.empasoft.mn:3000/">Нүүр</a>
+              <a href="http://empasoft.mn/">Нүүр</a>
             </li>
             <li class="NavigationItem">
-              <a href="http://beta.empasoft.mn:3000/about">Бидний тухай</a>
+              <a href="http://empasoft.mn/about">Бидний тухай</a>
             </li>
             <li class="NavigationItem">
-              <a href="http://beta.empasoft.mn:3000/product">Бүтээгдэхүүн</a>
+              <a href="http://empasoft.mn/product">Бүтээгдэхүүн</a>
             </li>
             <li class="NavigationItem">
-              <a href="http://beta.empasoft.mn:3000/service">Үйлчилгээ</a>
+              <a href="http://empasoft.mn/service">Үйлчилгээ</a>
             </li>
             <li class="NavigationItem">
-              <a href="http://beta.empasoft.mn:3000/training">Сургалт</a>
+              <a href="http://empasoft.mn/training">Сургалт</a>
             </li>
             <li class="NavigationItem">
-              <a href="http://beta.empasoft.mn:3000/kidsclub">Kids Club</a>
+              <a href="http://empasoft.mn/kidsclub">Kids Club</a>
             </li>
             <li class="NavigationItem">
-              <a href="http://beta.empasoft.mn:3000/news">Мэдээ</a>
+              <a href="http://empasoft.mn/news">Мэдээ</a>
             </li>
           </ul>
         </nav>
@@ -299,7 +312,21 @@
     <section class="aguulah">
       <%- data[`${id}html`] %> <% if (content.form_id) { %>
       <hr class="solid" />
+
       <div class="form"><%- content.form_id %></div>
+      <div class="lend">
+        <h3>Төлбөрөө lendpay ашиглан хуваан төлөх боломж</h3>
+        <a
+          href="https://lend.mn/postdynamic.html?article=9094945698495101850"
+          target="_blank"
+        >
+          <img
+            class="lendimg"
+            src="http://empasoft.mn:5000/static/img/lendmnlogo.svg"
+            alt="lend"
+          />
+        </a>
+      </div>
       <% } %>
     </section>
     <div class="main">
@@ -308,7 +335,7 @@
         <div class="left">
           <h3>Empasoft Office</h3>
           <img
-            src="http://13.76.216.31:3000/static/media/map.55e9e707.jpg"
+            src="http://13.76.216.31/static/media/map.55e9e707.jpg"
             alt="Map"
           />
         </div>

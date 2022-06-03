@@ -107,40 +107,33 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
-  //console.log("fucker",req.body);
-  // const { token } = req.body;
-  // console.log(token);
-  //  authenticatedAccount({ token: token })
-  //    .then(({ authenticated }) => {
-  //      newsDelete().then((resp) => res.json(resp));
-  //    })
-  //   .catch((error) => next(error));
+router.post("/delete/:id", async (req, res, next) => {
+  const { token } = req.body;
+  authenticatedAccount({ token: token })
+    .then(({ authenticated }) => {
+      newsDelete().then((resp) => res.json(resp));
+    })
+    .catch((error) => next(error));
 
-  //  newsDelete = async () => {
-  try {
-    //  const { title } = req.body;
-    const token = req.body;
-    const { id } = req.params;
-    const newsID = "n" + id;
+  newsDelete = async () => {
+    try {
+      //  const { title } = req.body;
+      const token = req.body;
+      const { id } = req.params;
+      const newsID = "n" + id;
 
-    const filesDir = path.join(__dirname, `../../public/img/news/${newsID}`);
+      const filesDir = path.join(__dirname, `../../public/img/news/${newsID}`);
 
-    const deleteNews = await pool.query("DELETE FROM news WHERE id = $1", [id]);
+      const deleteNews = await pool.query("DELETE FROM news WHERE id = $1", [
+        id,
+      ]);
 
-    rimraf(filesDir, function () {
-      res.json("success");
-    });
-    // fs.rmdir(filesDir, (err) => {
-    //   if (err) {
-    //     return console.log("error occurred in deleting directory", err);
-    //   }
-    //   console.log("dooone");
-    //   return "success";
-    // });
-  } catch (err) {
-    console.log(`err4`, err.message);
-  }
-  // };
+      rimraf(filesDir, function () {
+        return "success";
+      });
+    } catch (err) {
+      console.log(`err4`, err.message);
+    }
+  };
 });
 module.exports = router;

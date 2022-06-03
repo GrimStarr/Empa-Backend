@@ -36,7 +36,6 @@ router.get("/:id/content", async (req, res) => {
     Data === null ? (Data = Object.create({})) : "";
     // Data[`${id}assets`] = newAsset;
     Data[`${id}assets`] = newAsset;
-    console.log(pageData.rows[0]);
 
     res.render("news", {
       data: Data,
