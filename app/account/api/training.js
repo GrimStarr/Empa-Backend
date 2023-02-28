@@ -185,9 +185,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/download", function (req, res) {
-  const filesDir = path.join(__dirname, `../../public/file/Plan_of_2023.pdf`);
-  res.download(filesDir);
-});
-
 module.exports = router;

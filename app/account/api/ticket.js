@@ -21,7 +21,7 @@ const Stream = require("stream").Transform;
 
 router.get("/:data", (req, res) => {
   const data = req.params.data;
-  console.log(data)
+
   //   download(
   //     `https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=${data}`,
   //     function () {
@@ -30,7 +30,7 @@ router.get("/:data", (req, res) => {
   //   );
 
   https.get(
-    `https://api.qrserver.com/v1/create-qr-code/?size=115x115&data=${data}`,
+    `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${data}`,
     (result) => {
       let img = new Stream();
       result.on("data", (chunk) => {
@@ -43,19 +43,19 @@ router.get("/:data", (req, res) => {
         fs.writeFileSync(filname, img.read());
 
         const html = fs.readFileSync(
-          path.join(__dirname, "../../views/camp-template.html"),
+          path.join(__dirname, "../../views/template.html"),
           "utf-8"
         );
 
         var options = {
           width: "600px",
-          height: "228px",
+          height: "225px",
           border: "5mm",
         };
 
         var users = [
           {
-            imgurl: `http://empasoft.mn:5000/static/pdf/qr.png`,
+            imgurl: `http://beta.empasoft.mn:5000/static/pdf/qr.png`,
           },
         ];
 
